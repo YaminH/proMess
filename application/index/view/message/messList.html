@@ -1,0 +1,34 @@
+<head>
+</head>
+<body>
+<div>
+    {volist name='messages' id='list'}
+        <div >
+            <ul>
+	            <li> 
+	            	<p>{$list.user_name}</p>
+	            	<img src="../public/{$list.picture}" width="128" height="128" />
+	            	<button onclick="inform()">INFORM</button>
+	            	<p>{$list.mess_content}</p>
+	            	RESPOND
+	            	<input type="text" name="res_content">
+	            	<button onclick="subRes()">SUBMIT</button>		
+	            </li>
+            </ul>
+        </div>                   
+    {/volist}
+</div>
+<div>
+	<input type="text" name="newmessage">
+	<button onclick="publish()">PUBLISH</button>
+</div>
+<script type="text/javascript">
+	function publish(){
+
+	}
+
+	function inform(){
+		
+	}
+</script>
+</body>

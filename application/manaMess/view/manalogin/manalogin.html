@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+	<title>留言板</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/css/templatemo_style.css" rel="stylesheet" type="text/css">	
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/easyui/themes/icon.css">
+    <script type="text/javascript" src="__PUBLIC__/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/easyui/jquery.easyui.min.js"></script>
+</head>
+<body class="templatemo-bg-gray">
+	<div class="container">
+		<div class="col-md-12">
+			<div style="margin-top:20px;"><label style="font-family:'微软雅黑', '宋体',verdana, sans-serif;
+	font-size:30px;letter-spacing:3px;">&nbsp;&nbsp;留言板</label></div>
+			<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form" id="fm" action="__APP__/manaMess/Manalogin/loginM" method="post">				
+		        <div class="form-group">
+		          <div class="col-xs-12">		            
+		            <div class="control-wrapper">
+		            	<label for="admin_name" class="control-label fa-label"><img alt="" src="__PUBLIC__/images/admin_name.png"></label>
+		            	<input type="text" class="form-control" id="admin_name" name='admin_name' placeholder="用户名">
+		            </div>		            	            
+		          </div>              
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		            	<label for="admin_password" class="control-label fa-label"><img alt="" src="__PUBLIC__/images/password1.png"></label>
+		            	<input type="password" class="form-control" name='admin_password' id="admin_password" placeholder="密码">
+		            </div>
+		          </div>
+		        </div>
+		        
+		        <div class="form-group">
+		          <div class="col-md-12">
+		          	<div class="control-wrapper">
+		          		<input type="submit" value="登 录" onclick="login()" class="btn btn-info form-control">	          		
+		          	</div>
+		          </div>
+		        </div>
+		        <hr>		       
+		      </form>		      
+		</div>
+	</div>
+	<script type="text/javascript">			  
+    	function login(){    		
+    		$("#fm").form({   
+    		  	 success:function(data){
+    		  	 var data=$.parseJSON(data);
+                   if(data.success){
+						location.href='__APP__/manaMess/Manalogin';							
+					}else{
+						$.messager.alert("操作结果",data.message,"warning");
+					}
+    		}});
+    	}    	
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JXC</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/easyui/themes/icon.css">    
+    <script type="text/javascript" src="__PUBLIC__/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/easyui/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<style type="text/css">
+    html,body {
+            margin:0;
+            padding:0;
+            width:100%;
+            height:100%;
+            overflow:hidden;
+            font-family:'微软雅黑','宋体',verdana, sans-serif;
+            text-align: left;
+        }
+
+    a{TEXT-DECORATION:none;
+      text-transform: none;
+      text-indent: inherit;
+      text-shadow: none;
+      color: #000000;}
+    #subnav{
+        background:#fafafa;
+    }
+    span{
+        height:20px;
+        vertical-align:middle;
+    }
+    ul{
+        list-style-type:none;
+        font-size:15px;
+        margin:5px 5px;
+        padding:0;
+        
+    }
+    li{
+        margin:0;
+        height:25px;
+        line-height:25px;
+        padding-left:8px;
+        
+    }
+    </style>
+<body> 
+    <div class="easyui-layout"  fit="true" >
+        <div data-options="region:'north'" style="height:50px;background-color:#9ed3fa" >
+            <div style="width:5%;float:left;">&nbsp;</div>
+            <div style="width:93%;float:left;">
+                <label style="font-family:'微软雅黑', '宋体',verdana, sans-serif;font-size:30px;letter-spacing:3px;"> &nbsp;留言板</label>
+                <label style="float:right;padding-top:7px;">
+                <img id="logout_icon" onclick="logout()" onMouseover="CLogouticon()" onMouseout="CLogouticon()" src="__PUBLIC__/images/logout.png">
+            </label>
+            </div>
+            <div style="width:5%;float:left;text-align:right;"></div>
+        </div>
+        <div data-options="region:'south',split:true" style="text-align:center;height:30px;">留言板</div>
+        <div  data-options="region:'west',split:true" title="管理员:&nbsp;{$admin_name}" style="width:160px;">
+            <div class="easyui-accordion" data-options="fit:true,border:false">
+                    <span class="icon icon-right" >&emsp;</span> 
+                    <a onClick="label_icon(this)" href="javascript:addTab('留言管理','__APP__/Messmana');">留言管理</a> 
+
+                    <span class="icon icon-right" >&emsp;</span> 
+                    <a onClick="label_icon(this)" href="javascript:addTab('用户管理','__APP__/Usermana');">用户管理</a> 
+
+                    <span class="icon icon-right" >&emsp;</span> 
+                    <a onClick="label_icon(this)" href="javascript:addTab('留言管理','__APP__/Adminmana');">管理员</a>                                                          
+            </div>
+        </div>
+        <div region="center" >
+            <div id="main_tab" class="easyui-tabs" fit="true" border="false">
+            </div>
+        </div>
+
+<script type="text/javascript">
+    var total=0;    
+    function addTab(title,url)
+    {
+        if($("#main_tab").tabs('exists',title))
+        {
+            $("#main_tab").tabs('select',title);
+        }else{
+            $("#main_tab").tabs('add',{
+                title:title,
+                content: '<iframe src="' + url + '" frameborder=0 height=100% width=100% scrolling=no></iframe>',
+                closable:true
+            });
+        }   
+    }  
+    function logout(){
+        $.messager.confirm('注销','您确认退出系统吗？',
+                function(r){
+                     if(r){
+                        $.ajax({
+                            type:"POST",
+                            url:"__APP__/manaMess/Manalogin/logout",
+                            success :function(data){
+                                if(data.success){  //当返回success时跳转到首页
+                                    $.messager.alert("操作结果",data.message,"info");
+                                    location.href='__APP__/manaMess/Manalogin';     
+                                }
+                            }
+                        }); 
+                     }
+        }); 
+    }
+
+    function CLogouticon(){
+        if($("#logout_icon").attr('src')=='__PUBLIC__/images/logout.png'){
+            $("#logout_icon").attr('src','__PUBLIC__/images/logout2.png');
+        }else{
+            $("#logout_icon").attr('src','__PUBLIC__/images/logout.png');
+        }
+    }  
+    var lastLabel='';
+    function label_icon(currentLabel){
+        if(lastLabel){
+            lastLabel.parentNode.style.cssText='background:#FFF;font-weight:normal;';
+        }
+        currentLabel.parentNode.style.cssText='background:#FBEC88;font-weight:bold;';
+        lastLabel=currentLabel;
+            
+    }            
+</script>
+</body>
+</html>
+

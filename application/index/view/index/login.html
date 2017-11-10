@@ -1,0 +1,27 @@
+
+<head>
+
+
+</head>
+
+<body>
+
+<form name="LoginFrom" id="login_from" action="index.php">
+	USER-NAME <input type="text" name="user_name">
+	PASSWORD <input type="text" name="password">
+	<button onclick="login()">LOGIN</button>
+	<button onclick="register()">REGISER</button>
+</form>
+
+<script type="text/javascript">
+
+	function login(){
+      	document.getElementById("login_from").submit();
+	}
+
+	function register(){
+		window.location.href='register.html';
+	}
+	
+</script>
+</body>
